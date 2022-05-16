@@ -9,7 +9,7 @@
 
     else{
       include 'config/connection.php';
-      $sql="SELECT * FROM user,student WHERE user.role='3' ";
+      $sql="SELECT * FROM user,student WHERE user.role='4' AND student.userid=user.id ";
       $qry=mysqli_query($conn,$sql);
       
 
@@ -83,7 +83,7 @@
                   <th>Reg NO</th>
                   <th>Programme</th>
                   <th>Year</th>
-                  <th></th>
+                  <th>Action</th>
            
                 </tr>
                 </thead>
