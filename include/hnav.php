@@ -25,7 +25,7 @@
         <li class="nav-item">
           <a class="nav-link text-light" data-widget="fullscreen" href="#" role="button">
         
-            <i class="fas fa-user"></i>  <?php echo $_SESSION['userID']; ?>
+            <i class="fas fa-school"></i>  <?php echo $_SESSION['userID']; ?>
           </a>
         </li>
         <li class="nav-item">
@@ -46,7 +46,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-1 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="user.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Username</a>
@@ -59,37 +59,96 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           
+        <!-- Dashboard Section -->
+        <li class="nav-item menu-open">
+            <a href="host.php" class="nav-link active">
+              <i class="nav-icon fas fa-users"></i>
+                Dashboard 
+            </a>
+           
+          </li>
+    
+          <!-- request field students -->
+          
+          <li class="nav-item menu-open">
+            <a href="request_students.php" class="nav-link active">
+              <i class="nav-icon fas fa-download"></i>
+                Request Field Students
+            </a>
+           
+          </li>
+          <?php  
+
+          $sql200="SELECT * FROM host,user,student_request,category WHERE user.id='$id' and host.name=user.user_id and student_request.host=host.hid and category.cat_id=student_request.category ";
+          $qry200=mysqli_query($conn,$sql200);
+          if(mysqli_num_rows($qry200)!=0){
+
+          ?>
+                  <!-- Student Request Status -->
+            <li class="nav-item menu-open">
+            <a href="students_requests.php" class="nav-link active">
+              <i class="nav-icon fas fa-clock"></i>
+                Student Requests
+            </a>
+           
+          </li>
+
+          <?php } ?>
+          <!-- Field Requests -->
+          <li class="nav-item menu-open">
+            <a href="host_attachments.php" class="nav-link active">
+              <i class="nav-icon fas fa-clipboard"></i>
+              Attachment Requests
+            </a>
+           
+          </li>
+                   <!-- Field Students -->
+
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
+              <i class="nav-icon fas fa-users"></i>
+                Field Students
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
+           
+          </li>
+
+          <!-- Add Host Supervisor -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-user-plus"></i>
+                Add Supervisor
+            </a>
+           
+          </li>          
+          <!-- Our Supervisors -->
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-user-tie"></i>
+                Supervisors
+            </a>
+           
           </li>
 
 
+
+          <!--Field Reports -->
+
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-file"></i>
+                Field Reports
+            </a>
+           
+          </li>
+          <!--profile -->
+
+            <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-school"></i>
+                Profile
+            </a>
+           
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
