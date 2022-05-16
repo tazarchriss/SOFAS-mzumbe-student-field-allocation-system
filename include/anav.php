@@ -121,6 +121,32 @@
             </ul>
           </li>
           <div class="dropdown-divider"></div>
+            <!-- Manage Supervision -->
+            <li class="nav-item ">
+            <a href="#" class="nav-link bg-orange ">
+              <i class="nav-icon fas fa-download"></i>
+              <p>
+                Field Requests
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="host_requests.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Host </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="student_attachments.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Students</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <div class="dropdown-divider"></div>
           <!-- Manage Supervision -->
           <li class="nav-item ">
             <a href="#" class="nav-link bg-orange ">
