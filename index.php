@@ -41,26 +41,27 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index.html" class="nav-link text-light">MU-SOFAS</a>
       </li>
-  
+
     </ul>
 
   </nav>
   <!-- /.navbar -->
 
   <div class="row">
-  <!-- logout message -->
+
+      <!-- login form -->
+      <div class="col-md-6 mx-auto p-4 mt-3">
+         <!-- logout message -->
   <?php
                   if (isset($_GET["success"])){
                   ?>
-                <p class="btn btn-success btn-block disabled col-md-11 mt-2 mx-auto" >You have successfully Log out! <a href="index.php" class="float-right text-light" style="font-size:18px;border:1px solid white;width:25px;"><i class="fa fa-times"></i></a></p>
-                  <?php     
+                <p class="btn bg-orange btn-block disabled col-md-11 mt-2 mx-auto" >You have successfully Log out! <a href="index.php" class="float-right text-light" style="font-size:18px;border:1px solid white;width:25px;"><i class="fa fa-times"></i></a></p>
+                  <?php
                 }
 
                 ?>
-      <!-- login form -->
-      <div class="col-md-6 mx-auto p-4 mt-3">
         <div class="card mt-2 mx-auto">
-   
+
             <div class="card-body">
                 <div class="col-md-3 mx-auto">
                     <img src="logo.jpg" style="width:100%;height: 80px;;">
@@ -75,13 +76,13 @@
                       <label for="password" class="text-dark"><i class="fa fa-lock"></i> Password</label>
                       <input type="password" name="password" class="form-control" placeholder="Enter Password">
                   </div>
-                              
+
             </div>
             <?php
                   if (isset($_GET["request"])){
                   ?>
                 <p class="btn btn-danger btn-block disabled col-md-11 mx-auto" >wrong username or password</p>
-                  <?php     
+                  <?php
                 }
 
                 ?>
@@ -91,7 +92,7 @@
               </div>
             </div>
         </div>
-    </form> 
+    </form>
     </div>
 
 
@@ -99,7 +100,7 @@
   </div>
 
 </div>
- 
+
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
