@@ -1,5 +1,5 @@
 <!-- This file contain the navbar of the host dashboard -->
-  
+
    <!-- Navbar -->
    <nav class="main-header navbar navbar-expand navbar-white bg-dark">
     <!-- Left navbar links -->
@@ -14,17 +14,17 @@
             MU-SOFAS
         </a>
       </li>
-  
+
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-  
-      
-     
+
+
+
         <li class="nav-item">
           <a class="nav-link text-light" data-widget="fullscreen" href="#" role="button">
-        
+
             <i class="fas fa-school"></i>  <?php echo $_SESSION['userID']; ?>
           </a>
         </li>
@@ -53,38 +53,47 @@
         </div>
       </div>
 
- 
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
+
         <!-- Dashboard Section -->
         <li class="nav-item menu-open">
             <a href="student.php" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
-                Dashboard 
+                Dashboard
             </a>
-           
+
           </li>
-          
+                <?php
+
+                $student=$_SESSION['id'];
+                $sql100="SELECT * FROM attachment_request WHERE student='$student'";
+                $qry100=mysqli_query($conn,$sql100);
+                if(mysqli_num_rows($qry100)==0){
+
+          ?>
+
           <!-- request field students -->
           <li class="nav-item menu-open">
             <a href="request_attachment.php" class="nav-link active">
               <i class="nav-icon fas fa-download"></i>
                 Request Attachment
             </a>
-           
-          </li>
-          <!-- Attachment request status -->
-          <?php 
 
-                $student=$_SESSION['id'];
-                $sql100="SELECT * FROM attachment_request WHERE student='$student'";
-                $qry100=mysqli_query($conn,$sql100);
+          </li>
+          <?php } ?>
+          <!-- Attachment request status -->
+          <?php
+
+                // $student=$_SESSION['id'];
+                // $sql100="SELECT * FROM attachment_request WHERE student='$student'";
+                // $qry100=mysqli_query($conn,$sql100);
                 if(mysqli_num_rows($qry100)!=0){
                 $data=mysqli_fetch_array($qry100);
-          
+
                 if($data['status']!='Allocated'){
           ?>
 
@@ -99,41 +108,37 @@
 
                  <!-- Field Requests -->
                  <li class="nav-item menu-open">
-            <a href="student_allocation.php" class="nav-link active">
+            <a href="my_allocation.php" class="nav-link active">
               <i class="nav-icon fas fa-clipboard"></i>
-                Allocation Status
+                My Allocation
             </a>
-           
+
           </li>
           <?php }
                 }?>
 
-   
+  <!-- Add Host Supervisor -->
+          <li class="nav-item menu-open">
+            <a href="my_supervision.php" class="nav-link active">
+              <i class="nav-icon fas fa-user-tie"></i>
+                My Supervisors
+            </a>
+
+          </li>
+
                    <!-- Field Students -->
 
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-users"></i>
-                Field Students
+            <a href="log_books.php" class="nav-link active">
+              <i class="nav-icon fas fa-file"></i>
+                Log Books
             </a>
-           
+
           </li>
 
-          <!-- Add Host Supervisor -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-user-plus"></i>
-                Add Supervisor
-            </a>
-           
-          </li>          
-          <!-- Our Supervisors -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-user-tie"></i>
-                Supervisors
-            </a>
-           
+
+
+
           </li>
 
 
@@ -142,19 +147,19 @@
 
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-file"></i>
-                Field Reports
+              <i class="nav-icon fas fa-download"></i>
+                Submit Report
             </a>
-           
+
           </li>
           <!--profile -->
 
             <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-school"></i>
+              <i class="nav-icon fas fa-user"></i>
                 Profile
             </a>
-           
+
           </li>
         </ul>
       </nav>
