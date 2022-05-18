@@ -1,15 +1,21 @@
 <!-- This is the home page for Host/Organizations -->
+
 <?php
-
 session_start();
-// for header files
+    $id=$_SESSION['id'];
+    $name=$_SESSION['fname'];
+    if ($_SESSION['role']!='3') {
+      header('Location:index.html');
+    }
 
+    else{
+      include 'config/connection.php';
 include 'include/header.php';
 ?>
 <div class="wrapper">
 
- 
-<?php 
+
+<?php
 
 
 include 'include/hnav.php' ;?>
@@ -34,7 +40,7 @@ include 'include/hnav.php' ;?>
     </div>
     <!-- /.content-header -->
 
-   
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -91,3 +97,6 @@ include 'include/hnav.php' ;?>
 <script src="dist/js/pages/dashboard.js"></script>
 </body>
 </html>
+<?php
+    }
+    ?>
