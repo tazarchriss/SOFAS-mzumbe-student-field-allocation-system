@@ -10,9 +10,9 @@
 
     else{
       include 'config/connection.php';
-      $sql="SELECT * FROM attachment_request,host,user,student_request,category WHERE user.id=attachment_request.student and student_request.id=attachment_request.request and  host.name='$name' and student_request.host=host.hid and category.cat_id=student_request.category ";
+      $sql="SELECT * FROM attachment_request,host,user,student_request,category WHERE user.id=attachment_request.student and student_request.id=attachment_request.request and  host.name='$name' and student_request.host=host.hid and category.cat_id=student_request.category and attachment_request.status='Pending' ";
       $qry=mysqli_query($conn,$sql);
-      
+
 
       include 'include/header.php';
     ?>
@@ -20,12 +20,12 @@
 <body class="hold-transition ">
 <div class="wrapper">
 
- 
-  
+
+
 <?php include 'include/hnav.php'; ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  
+
     <!-- Start of Staff Table -->
     <section class="content mt-3">
         <div class="container-fluid">
@@ -41,7 +41,7 @@
                      <?php
 
                     if (mysqli_num_rows($qry) == 0){
-                   
+
 
                     ?>
                    <p class="text-dark text-center">No Attachment Requests Available!</p>
@@ -51,7 +51,7 @@
                     }
 
                     else{
-                      
+
                       ?>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -62,16 +62,16 @@
                   <th>Available</th>
                   <th>Status</th>
                   <th>Actions</th>
-           
+
                 </tr>
                 </thead>
                 <?php
                     for ($i=1; $i<=mysqli_num_rows($qry); $i++){
                       $row = mysqli_fetch_array($qry);
-                    
-              
 
-                  
+
+
+
                   ?>
             <tr>
               <td>
@@ -81,22 +81,22 @@
               </td>
 
               <td>
-              <?php echo $row['students']; ?> 
+              <?php echo $row['students']; ?>
              </td>
              <td>
-              <?php echo $row['remaining']; ?> 
+              <?php echo $row['remaining']; ?>
              </td>
               <td>
-              <?php echo $row['status']; ?>  
+              <?php echo $row['status']; ?>
               </td>
               <td>
                   <div class="text-center">
-                      <a class="bg-orange p-1" href="config/DeleteEarning.php?id=<?php echo $row['id'];?>"><i class=" ">Accept</i></a>
+                      <a class="bg-orange p-1" href="config/AcceptRequest.php?id=<?php echo $row['att_id'];?>"><i class=" ">Accept</i></a>
                       <a class="bg-dark  p-1" href="config/DeleteEarning.php?id=<?php echo $row['id'];?>"><i class="">Decline</i></a>
                     </div>
               </td>
             </tr>
-            <?php 
+            <?php
               }
             }
               ?>
@@ -109,7 +109,7 @@
           </div>
           </div>
     </section>
-   
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
