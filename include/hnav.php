@@ -1,5 +1,5 @@
 <!-- This file contain the navbar of the host dashboard -->
-  
+
    <!-- Navbar -->
    <nav class="main-header navbar navbar-expand navbar-white bg-dark">
     <!-- Left navbar links -->
@@ -14,17 +14,17 @@
             MU-SOFAS
         </a>
       </li>
-  
+
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-  
-      
-     
+
+
+
         <li class="nav-item">
           <a class="nav-link text-light" data-widget="fullscreen" href="#" role="button">
-        
+
             <i class="fas fa-school"></i>  <?php echo $_SESSION['userID']; ?>
           </a>
         </li>
@@ -53,31 +53,31 @@
         </div>
       </div>
 
- 
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
+
         <!-- Dashboard Section -->
         <li class="nav-item menu-open">
             <a href="host.php" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
-                Dashboard 
+                Dashboard
             </a>
-           
+
           </li>
-    
+
           <!-- request field students -->
-          
+
           <li class="nav-item menu-open">
             <a href="request_students.php" class="nav-link active">
               <i class="nav-icon fas fa-download"></i>
                 Request Field Students
             </a>
-           
+
           </li>
-          <?php  
+          <?php
 
           $sql200="SELECT * FROM host,user,student_request,category WHERE user.id='$id' and host.name=user.user_id and student_request.host=host.hid and category.cat_id=student_request.category ";
           $qry200=mysqli_query($conn,$sql200);
@@ -90,7 +90,7 @@
               <i class="nav-icon fas fa-clock"></i>
                 Student Requests
             </a>
-           
+
           </li>
 
           <?php } ?>
@@ -100,33 +100,33 @@
               <i class="nav-icon fas fa-clipboard"></i>
               Attachment Requests
             </a>
-           
+
           </li>
                    <!-- Field Students -->
 
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="host_students.php" class="nav-link active">
               <i class="nav-icon fas fa-users"></i>
                 Field Students
             </a>
-           
+
           </li>
 
           <!-- Add Host Supervisor -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="AddHost_Supervisor.php" class="nav-link active">
               <i class="nav-icon fas fa-user-plus"></i>
                 Add Supervisor
             </a>
-           
-          </li>          
+
+          </li>
           <!-- Our Supervisors -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="my_supervisors.php" class="nav-link active">
               <i class="nav-icon fas fa-user-tie"></i>
                 Supervisors
             </a>
-           
+
           </li>
 
 
@@ -138,7 +138,7 @@
               <i class="nav-icon fas fa-file"></i>
                 Field Reports
             </a>
-           
+
           </li>
           <!--profile -->
 
@@ -147,7 +147,7 @@
               <i class="nav-icon fas fa-school"></i>
                 Profile
             </a>
-           
+
           </li>
         </ul>
       </nav>
