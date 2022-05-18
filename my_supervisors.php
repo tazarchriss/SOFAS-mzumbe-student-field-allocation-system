@@ -4,17 +4,16 @@
     session_start();
     $id=$_SESSION['id'];
     $name=$_SESSION['fname'];
-    if ($_SESSION['role']!='4') {
+    if ($_SESSION['role']!='3') {
       header('Location:index.html');
     }
 
     else{
       include 'config/connection.php';
-      $sql="SELECT * FROM host_supervisors,allocation,attachment_request,user
-      WHERE user.id=allocation.host_supervisor
-      and  attachment_request.student='$id'
-      and host_supervisors.supervisor=user.id
-      and allocation.attachment=attachment_request.att_id";
+      $sql="SELECT * FROM user,host_supervisors,host
+      WHERE user.id=host_supervisors.supervisor
+      and  host.name='$name'
+      and host_supervisors.host=host.hid ";
       $qry=mysqli_query($conn,$sql);
 
 
@@ -26,7 +25,7 @@
 
 
 
-<?php include 'include/snav.php'; ?>
+<?php include 'include/hnav.php'; ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
@@ -38,7 +37,7 @@
                 <div class="col-md-12">
         <div class="card">
             <div class="card-header bg-dark">
-              <h3 class="card-title"><i class="fa fa-user-tie"></i> Organization Supervisor</h3>
+              <h3 class="card-title"></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -48,89 +47,63 @@
 
 
                     ?>
-                   <h4 class="text-dark text-center">Sorry You have not been Allocated Supervisors!</h4>
+                   <p class="text-dark text-center">No Attachment Requests Available!</p>
 
                     <?php
 
                     }
 
                     else{
-                        $row=mysqli_fetch_array($qry);
+
                       ?>
-               <table>
-                  <div class="row">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>SN</th>
+                  <th>Title</th>
+                  <th>Supervisor's Fullnames</th>
+                  <th>Since</th>
+                  <th>Actions</th>
 
-                  <tr>
-                    <td><h4 class="bg-dark col-md-12">Full Names</h4></td>
-                    <td><h4> &nbsp; <?php echo $row['title'].''.$row['fname'].' '.$row['mname'].' '.$row['lname']; ?></h4></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><h4 class="badge bg-orange col-md-12">Organization</h4></td>
-
-                  </tr>
-
-                  </div>
-
-                </table>
-
+                </tr>
+                </thead>
                 <?php
+                    for ($i=1; $i<=mysqli_num_rows($qry); $i++){
+                      $row = mysqli_fetch_array($qry);
 
-                    }
+
+
+
                   ?>
-            </div>
-            <!-- /.card-body -->
-          </div>
+            <tr>
+              <td>
+                <?php echo $i; ?>
+              </td>
+              <td>
+              <?php echo $row['title']; ?>
+             </td>
+              <td>
+                <?php echo $row['fname'].' '.$row['mname'].' '.$row['lname']; ?>
+              </td>
 
 
-        <br>
-        <div class="card">
-            <div class="card-header bg-dark">
-              <h3 class="card-title"><i class="fa fa-user-tie"></i> Mzumbe Supervisor</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                     <?php
-                         $sql="SELECT * FROM staff,allocation,attachment_request,user
-                         WHERE user.id=allocation.mu_supervisor
-                         and  attachment_request.student='$id'
-                         and staff.userId=user.id
-                         and allocation.attachment=attachment_request.att_id";
-                         $qry=mysqli_query($conn,$sql);
-                    if (mysqli_num_rows($qry) == 0){
+             <td>
+              <?php echo $row['year']; ?>
+             </td>
 
-
-                    ?>
-                   <h4 class="text-dark text-center">Sorry You have not been Allocated a Supervisor!</h4>
-
-                    <?php
-
-                    }
-
-                    else{
-                        $row=mysqli_fetch_array($qry);
-                      ?>
-               <table>
-                  <div class="row">
-
-                  <tr>
-                    <td><h4 class="bg-dark col-md-12">Full Names</h4></td>
-                    <td><h4> &nbsp; <?php echo $row['title'].' '.$row['fname'].' '.$row['mname'].' '.$row['lname']; ?></h4></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><h4 class="badge bg-orange col-md-12">Mzumbe University</h4></td>
-
-                  </tr>
-
-                  </div>
-
-                </table>
-
-                <?php
-
-                    }
-                  ?>
+              <td>
+                  <div class="text-center">
+                      <a class=" badge bg-orange p-1" href="SingleAllocation.php?id=<?php echo $row['alloc_id'];?>"><i class="fa fa-user"> View Supervisor</i></a>
+                      <!-- <a class="bg-dark  p-1" href="config/DeleteEarning.php?id=<?php echo $row['id'];?>"><i class="">Decline</i></a> -->
+                    </div>
+              </td>
+            </tr>
+            <?php
+              }
+            }
+              ?>
+              </tbody>
+              </table>
             </div>
             <!-- /.card-body -->
           </div>
