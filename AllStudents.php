@@ -9,9 +9,12 @@
 
     else{
       include 'config/connection.php';
-      $sql="SELECT * FROM user,student WHERE user.role='4' AND student.userid=user.id ";
+      $sql="SELECT * FROM user,student,programme
+      WHERE user.role='4'
+      AND student.userid=user.id
+      AND programme.prog_id=student.program ";
       $qry=mysqli_query($conn,$sql);
-      
+
 
       include 'include/header.php';
     ?>
@@ -19,10 +22,10 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
- 
-  
+
+
 <?php include 'include/anav.php'; ?>
-  
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -56,20 +59,20 @@
               <?php
 
                     if (mysqli_num_rows($qry) == 0){
-                   
+
 
                     ?>
-                   <p class="text-info">No student was selected !</p>
+                   <p class="alert text-dark">No student was Registered !</p>
 
                     <?php
 
                     }
 
                     else{
-                      
+
                       ?>
 
-                      
+
             <div class="card-header bg-dark">
               <h3 class="card-title"></h3>
             </div>
@@ -84,19 +87,16 @@
                   <th>Programme</th>
                   <th>Year</th>
                   <th>Action</th>
-           
+
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                     for ($i=1; $i<=mysqli_num_rows($qry); $i++){
                       $row = mysqli_fetch_array($qry);
-                    $prog=$row['program'];
-                     $sql1="SELECT * FROM programme WHERE `id`='$prog' ";
-                     $qry1=mysqli_query($conn,$sql1);
-                     $res=mysqli_fetch_array($qry1);
 
-                  
+
+
                   ?>
             <tr>
               <td>
@@ -108,25 +108,25 @@
               <?php echo $row['user_id']; ?>
               </td>
               <td>
-              <?php echo $res['name']; ?> 
+              <?php echo $row['prog_name']; ?>
              </td>
               <td>
-              <?php echo $row['year']; ?> 
-              
+              <?php echo $row['year']; ?>
+
               </td>
               <td>
                   <div class="text-center">
-                      <a class="bg-dark p-1" href="EditEarning.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye "></i></a>
-                      <a class="bg-orange p-1" href="config/DeleteEarning.php?id=<?php echo $row['id'];?>"><i class="fa fa-pen "></i></a>
+                  <a class="bg-dark p-1" href="SingleStudent.php?id=<?php echo $row['user_id'];?>"><i class="fa fa-eye "></i></a>
+                      <a class="bg-orange p-1" href="EditStudent.php?id=<?php echo $row['user_id'];?>"><i class="fa fa-pen "></i></a>
                   </div>
               </td>
             </tr>
-            <?php 
+            <?php
               }
             }
               ?>
               </tbody>
-               
+
               </table>
             </div>
             <!-- /.card-body -->
@@ -135,7 +135,7 @@
           </div>
           </div>
     </section>
-   
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -181,7 +181,7 @@
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["pdf"]
+
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
