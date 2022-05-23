@@ -1,17 +1,20 @@
-<!-- This is the page contain the form for adding staff -->
+<!-- This is the page for managing all the staffs  --><!-- This is a page for Admin Home page -->
 <?php
 
     session_start();
     $id=$_SESSION['id'];
     if ($_SESSION['role']!='1') {
-      header('Location:index.php');
+      header('Location:index.html');
     }
 
     else{
       include 'config/connection.php';
-      $sql="SELECT * FROM user WHERE id='$id'";
+      $sql="SELECT * FROM user,staff,position
+      WHERE user.role='2'
+      AND staff.userId=user.id
+      AND position.position_id=staff.position";
       $qry=mysqli_query($conn,$sql);
-      $row=mysqli_fetch_array($qry);
+
 
       include 'include/header.php';
     ?>
@@ -19,9 +22,11 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
- 
-  
+
+
 <?php include 'include/anav.php'; ?>
+
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -30,11 +35,11 @@
         <div class="row mb-2">
             <!-- Manage staffs buttons -->
           <div class="col-sm-6">
-            <a href="AllStaffs.php" class="btn bg-orange text-white "><i class=" fa fa-bars"></i> View All Staffs</a>
+            <a href="AddStaff.php" class="btn bg-orange text-white "><i class=" fa fa-user-plus"></i> Register Staff</a>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item "><a href="admin.html" class="text-orange">Home</a></li>
+              <li class="breadcrumb-item "><a href="admin.php" class="text-orange">Home</a></li>
               <li class="breadcrumb-item ">Manage Staffs</li>
             </ol>
           </div><!-- /.col -->
@@ -50,146 +55,83 @@
             <div class="row">
                 <div class="col-md-12">
         <div class="card">
+
+              <?php
+
+                    if (mysqli_num_rows($qry) == 0){
+
+
+                    ?>
+                   <p class="text-dark text-center">No staff was registerd !</p>
+
+                    <?php
+
+                    }
+
+                    else{
+
+                      ?>
+
+
             <div class="card-header bg-dark">
-              <h3 class="card-title text-light"><i class="fa fa-user-plus text-orange"></i> Register Staff</h3>
+              <h3 class="card-title"></h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <!-- start of staff Registration Form -->
-                <form action="config/registration.php" method="post" class="form-group">
-                    <div class="form-group col-md-6 float-left">
-                        <label for="fname">Firstname</label>
-                        <input type="text" name="fname" id="" class="form-control" placeholder="Enter Firstname" required>
-                    </div>
-                    <div class="form-group col-md-6 float-left">
-                        <label for="mname">Middlename</label>
-                        <input type="text" name="mname" id="" class="form-control" placeholder="Enter Middlename" required>
-                    </div>
-                    <div class="form-group col-md-6 float-left">
-                        <label for="mname">Surname</label>
-                        <input type="text" name="sname" id="" class="form-control" placeholder="Enter Surname" required>
-                    </div>
-                    <div class="form-group col-md-6 float-left">
-                        <label for="title">Title</label>
-                        <select name="title" id="title" class="form-control bg-dark" required>
-                          <option value="Mr.">MR</option>
-                          <option value="Ms.">MS</option>
-                          <option value="Dr.">DR</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6 float-left">
-                        <label for="mname">Staff ID</label>
-                        <input type="text" name="sid" id="" class="form-control" placeholder="Enter Staff ID" required>
-                    </div>
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>SN</th>
+                  <th>Full Names</th>
+                  <th>School</th>
+                  <th>StaffID</th>
+                  <th>Position</th>
+                  <th></th>
 
-                    <div class="form-group col-md-6 float-left">
-                        <label for="mname">Phonenumber</label>
-                        <input type="text" name="pnumber" id="" class="form-control" placeholder="Enter Phone number" required>
-                    </div>
-                    <div class="form-group col-md-6 float-left">
-                        <label for="mname">Email</label>
-                        <input type="email" name="email" id="" class="form-control" placeholder="Enter Email" required>
-                    </div>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                    for ($i=1; $i<=mysqli_num_rows($qry); $i++){
+                      $row = mysqli_fetch_array($qry);
 
-                    <div class="form-group col-md-6 float-left">
-                        <label for="exampleInputEmail1">School/Faculty</label>
-                        <select name="school" class="form-control bg-dark" required>
-                            <?php
-                                $sql="select * from school";
-                                $query=mysqli_query($conn,$sql);
-
-                                if(!$query){
-
-                                  die(mysqli_error($conn));
-                                }
-
-                                while ($result=mysqli_fetch_array($query)) {
-                                  $id=$result['id'];
-                                  $name=$result['name'];
-                                  ?>
-                              <option value="<?php echo $id; ?>">
-                                <?php echo $name; ?>
-                              </option>
-
-                                  <?php
+                     $sql1="SELECT * FROM staff WHERE userId='2'";
+                     $qry1=mysqli_query($conn,$sql1);
+                     $res=mysqli_fetch_array($qry1);
 
 
-                                }
+                  ?>
+            <tr>
+              <td>
+                <?php echo $i; ?></td>
+              <td>
+                <?php echo $row['title'].' '.$row['fname'].' '.$row['lname']; ?>
+              </td>
+              <td>
+              <?php echo $row['mname']; ?>
+              </td>
 
-                                ?>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6 float-left">
-                        <label for="exampleInputEmail1">Department</label>
-                        <select name="department" class="form-control bg-dark" required>
-                            <?php
-                                $sql="select * from department";
-                                $query=mysqli_query($conn,$sql);
+              <td>
+              <?php echo $row['user_id']; ?>
 
-                                if(!$query){
+              </td>
+              <td>
+              <?php echo $row['pname']; ?>
+             </td>
+              <td>
+                  <div class="text-center">
+                      <a class="bg-dark p-1" href="SingleStaff.php?id=<?php echo $row['user_id'];?>"><i class="fa fa-eye "></i></a>
+                      <a class="bg-orange p-1" href="EditStaff.php?id=<?php echo $row['user_id'];?>"><i class="fa fa-pen "></i></a>
+                  </div>
+              </td>
+            </tr>
+            <?php
+              }
+            }
+              ?>
+              </tbody>
 
-                                  die(mysqli_error($conn));
-                                }
-
-                                while ($result=mysqli_fetch_array($query)) {
-                                  $id=$result['id'];
-                                  $name=$result['name'];
-                                  ?>
-                              <option value="<?php echo $id; ?>">
-                                <?php echo $name; ?>
-                              </option>
-
-                                  <?php
-
-
-                                }
-
-                                ?>
-                        </select>
-                    </div>
-                    
-
-
-                    <div class="form-group col-md-6 float-left">
-                        <label for="exampleInputEmail1">Position</label>
-                        <select name="position" class="form-control bg-dark" required>
-                            <?php
-                                $sql="select * from position";
-                                $query=mysqli_query($conn,$sql);
-
-                                if(!$query){
-
-                                  die(mysqli_error($conn));
-                                }
-
-                                while ($result=mysqli_fetch_array($query)) {
-                                  $id=$result['id'];
-                                  $name=$result['name'];
-                                  ?>
-                              <option value="<?php echo $id; ?>">
-                                <?php echo $name; ?>
-                              </option>
-
-                                  <?php
-
-
-                                }
-
-                                ?>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6 float-left">
-                        <label for="sex">Sex</label>
-                        <select name="sex" id="title" class="form-control bg-dark" required>
-                          <option value="Male">Male</option>
-                          <option value="MS.">Female</option>
-                        </select>
-                    </div>
-                    <!-- Register Button -->
-                    <div class="form-group ">
-                        <input type="submit" name="staff" id="" class="btn btn-block bg-orange text-light" value="Add Staff">
-                    </div>
-                </form>
+              </table>
             </div>
             <!-- /.card-body -->
           </div>
@@ -197,7 +139,7 @@
           </div>
           </div>
     </section>
-   
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -258,7 +200,5 @@
 </script>
 </body>
 </html>
-
-<?php
-    }
-    ?>
+<?php }
+?>
