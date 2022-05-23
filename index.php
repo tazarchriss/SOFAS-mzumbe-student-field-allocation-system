@@ -53,12 +53,19 @@
       <div class="col-md-6 mx-auto p-4 mt-3">
          <!-- logout message -->
   <?php
-                  if (isset($_GET["success"])){
+                // loged out
+                if (isset($_GET["success"])){
                   ?>
-                <p class="btn bg-orange btn-block disabled col-md-11 mt-2 mx-auto" >You have successfully Log out! <a href="index.php" class="float-right text-light" style="font-size:18px;border:1px solid white;width:25px;"><i class="fa fa-times"></i></a></p>
+                <p class="alert bg-orange col-md-12 mt-2 mx-auto" >You have successfully Log out! <a href="index.php" class="float-right text-light text-center" style="font-size:18px;border:1px solid white;width:30px;"><i class="fa fa-times text-light"></i></a></p>
                   <?php
                 }
 
+                // changed password
+                if (isset($_GET["password"])){
+                  ?>
+                <p class="alert bg-orange col-md-12 mt-2 mx-auto" >Password Change successful,login again! <a href="index.php" class="float-right text-light text-center" style="font-size:18px;border:1px solid white;width:30px;"><i class="fa fa-times text-light"></i></a></p>
+                  <?php
+                }
                 ?>
         <div class="card mt-2 mx-auto">
 
