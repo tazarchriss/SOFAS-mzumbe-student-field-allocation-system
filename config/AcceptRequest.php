@@ -25,6 +25,11 @@ $qry=mysqli_query($conn,$sql);
 if (!$qry) {
   die(mysqli_error($conn));
 }
+else{
+  header(
+    'Location:../host_students.php'
+  );
+}
 }
 
 
