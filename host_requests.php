@@ -11,19 +11,19 @@
       include 'config/connection.php';
       $sql="SELECT * FROM host,student_request,category WHERE  student_request.host=host.hid AND category.cat_id=student_request.category  ";
       $qry=mysqli_query($conn,$sql);
- 
+
       include 'include/header.php';
     ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
- 
-  
+
+
 <?php include 'include/anav.php'; ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  
+
     <!-- Start of Staff Table -->
     <section class="content mt-3">
         <div class="container-fluid">
@@ -39,17 +39,17 @@
                      <?php
 
                     if (mysqli_num_rows($qry) == 0){
-                   
+
 
                     ?>
-                   <p class="text-info">No student was selected !</p>
+                   <p class="text-dark">Sorry Host Request are not Available !</p>
 
                     <?php
 
                     }
 
                     else{
-                      
+
                       ?>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -61,16 +61,16 @@
                   <th>Year</th>
                   <th>Status</th>
                   <th>Action</th>
-           
+
                 </tr>
                 </thead>
                 <?php
                     for ($i=1; $i<=mysqli_num_rows($qry); $i++){
                       $row = mysqli_fetch_array($qry);
-                    
-              
 
-                  
+
+
+
                   ?>
             <tr>
               <td>
@@ -85,21 +85,21 @@
               </td>
 
               <td>
-              <?php echo $row['students']; ?> 
+              <?php echo $row['students']; ?>
              </td>
              <td>
-              <?php echo $row['year']; ?> 
+              <?php echo $row['year']; ?>
              </td>
               <td>
-              <?php echo $row['ostatus']; ?>  
+              <?php echo $row['ostatus']; ?>
               </td>
               <td>
                   <div class="text-center">
-                      <a class="bg-orange p-1" href="config/DeleteEarning.php?id=<?php echo $row['id'];?>"><i class="fa fa-trash "></i></a>
+                      <a class="bg-orange p-1" href="SingleHostRequest.php?id=<?php echo $row['id'];?>"><i class="fa fa-download ">View</i></a>
                   </div>
               </td>
             </tr>
-            <?php 
+            <?php
               }
             }
               ?>
@@ -112,7 +112,7 @@
           </div>
           </div>
     </section>
-   
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
