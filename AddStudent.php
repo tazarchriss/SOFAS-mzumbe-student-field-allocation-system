@@ -19,8 +19,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
- 
-  
+
+
 <?php include 'include/anav.php'; ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -69,7 +69,7 @@
                         <label for="mname">Surname</label>
                         <input type="text" name="sname" id="" class="form-control" placeholder="Enter Surname" required>
                     </div>
-                
+
                     <div class="form-group col-md-6 float-left">
                     <label for="mname">Registration No</label>
                 <input type="text" name="regno" id="" class="form-control" placeholder="Enter Registration Number">
@@ -97,8 +97,8 @@
                                 }
 
                                 while ($result=mysqli_fetch_array($query)) {
-                                  $id=$result['id'];
-                                  $name=$result['name'];
+                                  $id=$result['prog_id'];
+                                  $name=$result['prog_name'];
                                   ?>
                               <option value="<?php echo $id; ?>">
                                 <?php echo $name; ?>
@@ -112,7 +112,7 @@
                                 ?>
                         </select>
                     </div>
-         
+
                     <div class="form-group col-md-6 float-left">
                         <label for="sex">Sex</label>
                         <select name="sex" id="title" class="form-control bg-dark" required>
@@ -120,7 +120,7 @@
                           <option value="MS.">Female</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group col-md-6 float-left">
                         <label for="year">Academic Year</label>
                         <select name="year" id="title" class="form-control bg-dark" required>
@@ -142,7 +142,7 @@
           </div>
           </div>
     </section>
-   
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
