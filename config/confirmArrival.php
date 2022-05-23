@@ -19,11 +19,9 @@ if (!$qry) {
 }
 else
 {
-// $sql="INSERT INTO `allocation`(`attachment`,`year`,`start_date`,`end_date`) VALUES ('$id','$year','$Date','$end_date')";
-// $qry=mysqli_query($conn,$sql);
-// if (!$qry) {
-//   die(mysqli_error($conn));
-// }
+  header(
+    'Location:../host_students.php'
+  );
 }
 
 
