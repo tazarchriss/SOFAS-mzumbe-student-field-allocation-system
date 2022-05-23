@@ -13,14 +13,14 @@
             MU-SOFAS
         </a>
       </li>
-  
+
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-  
-      
-     
+
+
+
         <li class="nav-item">
           <a class="nav-link text-light" >
             <i class="fas fa-user"></i>  <?php echo $_SESSION['userID']; ?>
@@ -44,29 +44,29 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-1 d-flex">
         <div class="image">
-          <img src="user.png" class="img-circle elevation-2" alt="User Image">
+          <img src="uploads/avatars/<?php echo $_SESSION['avatar']?>" class="img-circle elevation-3"   alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Username</a>
+          <a href="#" class="d-block"> <?php echo $_SESSION['fname'].' '.$_SESSION['mname'].' '.$_SESSION['lname']; ?></a>
         </div>
       </div>
 
- 
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column " data-widget="treeview" role="menu" data-accordion="false">
-            
+
         <!-- Dashboard -->
         <li class="nav-item ">
             <a href="admin.php" class="nav-link text-light bg-orange">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                
+
               </p>
             </a>
-     
+
           </li>
           <div class="dropdown-divider"></div>
         <!-- Manage users  -->
@@ -85,7 +85,7 @@
                   <p>Staffs</p>
                 </a>
               </li>
-     
+
               <li class="nav-item">
                 <a href="AllStudents.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -117,7 +117,7 @@
                   <p>View Organizations</p>
                 </a>
               </li>
-              
+
             </ul>
           </li>
           <div class="dropdown-divider"></div>
@@ -143,7 +143,7 @@
                   <p>Students</p>
                 </a>
               </li>
-              
+
             </ul>
           </li>
           <div class="dropdown-divider"></div>
@@ -160,7 +160,7 @@
               <li class="nav-item">
                 <a href="usupervisors.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Uni-Supervisors</p>
+                  <p>Mu-Supervisors</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -180,18 +180,18 @@
           <div class="dropdown-divider"></div>
         <!-- profile -->
         <li class="nav-item ">
-            <a href="" class="nav-link text-light bg-orange">
+            <a href="user_profile.php?id=<?php echo $_SESSION['id']?>" class="nav-link text-light bg-orange">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile
-                
+
               </p>
             </a>
-     
+
           </li>
-        
+
         </ul>
-      
+
       </nav>
       <!-- /.sidebar-menu -->
     </div>
