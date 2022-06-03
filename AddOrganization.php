@@ -19,19 +19,19 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
- 
-  
+
+
 <?php include 'include/anav.php'; ?>
 
 
 
- 
-  
+
+
 
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  
+
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -73,22 +73,46 @@
                         <input type="text" name="name" id="name" class="form-control" placeholder="Enter Organization Name" required>
                     </div>
                     <div class="form-group col-md-6 float-left">
-                        <label for="address">Address</label>
+                        <label for="address">Box</label>
                         <input type="text" name="address" id="address" class="form-control" placeholder="Enter Organization Address" required>
                     </div>
                     <div class="form-group col-md-6 float-left">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" class="form-control" placeholder="Enter Organization Email" required>
                     </div>
-                
+
                     <div class="form-group col-md-6 float-left">
                         <label for="tel">Telephone Number</label>
                         <input type="text" name="tel" id="tel" class="form-control" placeholder="Enter Organization Telephone Number" required>
                     </div>
-                    
+
                     <div class="form-group col-md-6 float-left">
-                        <label for="region">Region</label>
-                        <input type="text" name="region" id="region" class="form-control" placeholder="Enter Organization Region" required>
+                        <label for="exampleInputEmail1">Region</label>
+                        <select name="region" class="form-control bg-dark" required>
+                            <?php
+                                $sql="select * from region";
+                                $query=mysqli_query($conn,$sql);
+
+                                if(!$query){
+
+                                  die(mysqli_error($conn));
+                                }
+
+                                while ($result=mysqli_fetch_array($query)) {
+                                  $id=$result['reg_id'];
+                                  $name=$result['rname'];
+                                  ?>
+                              <option value="<?php echo $id; ?>">
+                                <?php echo $name; ?>
+                              </option>
+
+                                  <?php
+
+
+                                }
+
+                                ?>
+                        </select>
                     </div>
 
                     <div class="form-group col-md-6 float-left">
@@ -110,7 +134,7 @@
           </div>
           </div>
     </section>
-   
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
