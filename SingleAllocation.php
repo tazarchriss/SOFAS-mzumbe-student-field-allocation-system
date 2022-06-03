@@ -4,18 +4,16 @@
     session_start();
     $id=$_SESSION['id'];
     $name=$_GET['id'];
-    if ($_SESSION['role']!='3') {
-      header('Location:index.html');
+    if ($_SESSION['role']=='') {
+      header('Location:index.php');
     }
 
     else{
       include 'config/connection.php';
-      $sql="SELECT * FROM user,allocation,attachment_request,student_request,student,programme
-      WHERE allocation.alloc_id='$name'
-      AND attachment_request.att_id=allocation.attachment
-      AND user.id=attachment_request.student
-      AND student.userid=user.id
-      AND student_request.id=attachment_request.request ";
+      $sql="SELECT * FROM user,allocation,attachment_request,programme
+      WHERE allocation.attachment=attachment_request.att_id
+      AND attachment_request.student=user.id
+      AND user.user_id='$name' ";
       $qry=mysqli_query($conn,$sql);
       $row=mysqli_fetch_array($qry);
 
@@ -28,7 +26,32 @@
 
 
 
-<?php include 'include/hnav.php';?>
+<?php
+if ($_SESSION['role']=='1') {
+  include 'include/anav.php';
+}
+if ($_SESSION['position']=='Dean') {
+  include 'include/dnav.php';
+}
+if ($_SESSION['position']=='HOD') {
+  include 'include/hodnav.php';
+}
+if ($_SESSION['position']=='Coordinator') {
+  include 'include/Coordinatornav.php';
+}
+if ($_SESSION['position']=='staff') {
+  include 'include/staffNav.php';
+}
+if ($_SESSION['role']=='6') {
+  include 'include/hsnav.php';
+}
+if ($_SESSION['role']=='3') {
+  include 'include/hnav.php';
+}
+if ($_SESSION['role']=='4') {
+  header('Location:index.html');
+}
+?>
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -45,17 +68,20 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-        <div class="col-md-10 ">
+        <div class="col-md-12 mx-auto  ">
+                <div class="col-md-4 mx-auto m-2">
+                  <img src="uploads/avatars/<?php echo $row['avatar']; ?>" alt="" width="100%">
+                </div>
                 <table>
                   <div class="row">
                   <tr>
                     <td><h3 class="badge badge-dark col-md-12">Student's Names</h3></td>
                     <td><h4><?php echo $row['fname'].' '.$row['mname'].' '.$row['lname']; ?></h4></td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td><h4 class="badge badge-dark col-md-12">programme</h4></td>
-                    <td><h5><?php echo $row['name']; ?></h5></td>
-                  </tr>
+                    <td><h5><?php echo $row['prog_name']; ?></h5></td>
+                  </tr> -->
                   <tr>
                     <td><h4 class="badge badge-dark col-md-12">Status</h4></td>
                     <td><h5 class="text-orange"><?php echo $row['alloc_status']; ?></h5></td>
@@ -69,6 +95,10 @@
                 </table>
                 </div>
                 <hr>
+                <a href="StudentAssessment.php?id=<?php echo $row['att_id'];  ?>" class="btn bg-orange m-1">Assess Student</a>
+                  <a href="SingleStudentlogs.php?id=<?php echo $row['id']; ?>" class="btn bg-orange m-1">Log Books</a>
+                  <a href="" class="btn bg-orange m-1">Report</a>
+
 
                 <?php
 
