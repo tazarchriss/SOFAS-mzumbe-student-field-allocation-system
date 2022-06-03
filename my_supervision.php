@@ -57,12 +57,27 @@
                     else{
                         $row=mysqli_fetch_array($qry);
                       ?>
+         <div class="col-md-3 float-right">
+            <img src="uploads/avatars/<?php echo $row['avatar']; ?>" alt="" width="100%">
+            </div>
+            <div class="col-md-10 ">
+              <div class="col-md-12">
                <table>
                   <div class="row">
 
                   <tr>
                     <td><h4 class="bg-dark col-md-12">Full Names</h4></td>
-                    <td><h4> &nbsp; <?php echo $row['title'].''.$row['fname'].' '.$row['mname'].' '.$row['lname']; ?></h4></td>
+                    <td><p> &nbsp; <?php echo $row['title'].''.$row['fname'].' '.$row['mname'].' '.$row['lname']; ?></p></td>
+                  </tr>
+                  <tr>
+                  <tr>
+                    <td><h4 class="bg-dark col-md-12">Email</h4></td>
+                    <td><p> &nbsp; <?php echo $row['email']; ?></p></td>
+                  </tr>
+                  <tr>
+                  <tr>
+                    <td><h4 class="bg-dark col-md-12">Phonenumber</h4></td>
+                    <td><p> &nbsp; <?php echo $row['pnumber']; ?></p></td>
                   </tr>
                   <tr>
                     <td></td>
@@ -78,6 +93,8 @@
 
                     }
                   ?>
+                  </div>
+                  </div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -91,17 +108,23 @@
             <!-- /.card-header -->
             <div class="card-body">
                      <?php
-                         $sql="SELECT * FROM staff,allocation,attachment_request,user
-                         WHERE user.id=allocation.mu_supervisor
-                         and  attachment_request.student='$id'
-                         and staff.userId=user.id
-                         and allocation.attachment=attachment_request.att_id";
+                          $year=date('Y');
+                         $sql="SELECT * FROM mu_supervision,staff,student_request,attachment_request,region,host,user
+                         WHERE attachment_request.student='$id'
+                         and student_request.id=attachment_request.request
+                         and host.hid=student_request.host
+                         and region.reg_id=host.region
+                         and mu_supervision.zone=region.zone
+                         and staff.staff_id=mu_supervision.supervisor
+                         and user.id=staff.userId
+                         and mu_supervision.year='$year'";
                          $qry=mysqli_query($conn,$sql);
+
+
                     if (mysqli_num_rows($qry) == 0){
 
-
                     ?>
-                   <h4 class="text-dark text-center">Sorry You have not been Allocated a Supervisor!</h4>
+                   <h4 class="text-dark text-center">Sorry You have not been Allocated Mzumbe Supervisor!</h4>
 
                     <?php
 
@@ -110,13 +133,28 @@
                     else{
                         $row=mysqli_fetch_array($qry);
                       ?>
+              <div class="col-md-3 float-right">
+            <img src="uploads/avatars/<?php echo $row['avatar']; ?>" alt="" width="100%">
+            </div>
+              <div class="col-md-9 ">
+              <div class="col-md-12">
                <table>
                   <div class="row">
 
                   <tr>
                     <td><h4 class="bg-dark col-md-12">Full Names</h4></td>
-                    <td><h4> &nbsp; <?php echo $row['title'].' '.$row['fname'].' '.$row['mname'].' '.$row['lname']; ?></h4></td>
+                    <td><p> &nbsp; <?php echo $row['title'].' '.$row['fname'].' '.$row['mname'].' '.$row['lname']; ?></p></td>
                   </tr>
+                  <tr>
+                    <td><h4 class="bg-dark col-md-12">Email</h4></td>
+                    <td><p> &nbsp; <?php echo $row['email']; ?></p></td>
+                  </tr>
+                  <tr>
+                  <tr>
+                    <td><h4 class="bg-dark col-md-12">Phonenumber</h4></td>
+                    <td><p> &nbsp; <?php echo $row['pnumber']; ?></p></td>
+                  </tr>
+
                   <tr>
                     <td></td>
                     <td><h4 class="badge bg-orange col-md-12">Mzumbe University</h4></td>
@@ -135,8 +173,8 @@
             <!-- /.card-body -->
           </div>
         </div>
-          </div>
-          </div>
+
+
     </section>
 
     <!-- /.content -->
