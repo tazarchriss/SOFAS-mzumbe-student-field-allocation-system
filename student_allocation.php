@@ -9,9 +9,13 @@
 
     else{
       include 'config/connection.php';
-      $sql="SELECT * FROM host,student_request,attachment_request,user WHERE  student_request.id=attachment_request.request AND host.Hid=student_request.host AND user.id=attachment_request.student  ";
+      $sql="SELECT * FROM host,student_request,attachment_request,user WHERE
+      student_request.id=attachment_request.request
+      AND host.Hid=student_request.host
+      AND attachment_request.student=user.id
+      AND user.id='$id'  ";
       $qry=mysqli_query($conn,$sql);
-      
+
 
       include 'include/header.php';
     ?>
@@ -19,12 +23,12 @@
 <body class="hold-transition ">
 <div class="wrapper">
 
- 
-  
+
+
 <?php include 'include/snav.php'; ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  
+
     <!-- Start of Staff Table -->
     <section class="content mt-3">
         <div class="container-fluid">
@@ -40,7 +44,7 @@
                      <?php
 
                     if (mysqli_num_rows($qry) == 0){
-                   
+
 
                     ?>
                    <p class="text-info">No student was selected !</p>
@@ -50,25 +54,25 @@
                     }
 
                     else{
-                      
+
                       ?>
-             
+
                 <?php
                     for ($i=1; $i<=mysqli_num_rows($qry); $i++){
                       $row = mysqli_fetch_array($qry);
-                    
-              
 
-                  
+
+
+
                   ?>
          <!-- card boody items -->
-                <h4 class="text-center">Your Field Attachment Request status is:</h4>      
+                <h4 class="text-center">Your Field Attachment Request status is:</h4>
          <h3 class="col-md-6 badge-dark text-center text-orange mx-auto"><?php echo $row['status']; ?></h3    >
-            <?php 
+            <?php
               }
             }
               ?>
-           
+
             </div>
             <!-- /.card-body -->
           </div>
@@ -76,7 +80,7 @@
           </div>
           </div>
     </section>
-   
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
