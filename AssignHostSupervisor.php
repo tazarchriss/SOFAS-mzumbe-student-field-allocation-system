@@ -103,7 +103,7 @@
                 ?>
 <br>
                     <p class="text-center">If the Supervisor is not visible in the list please register him by clicking  the button below:</p>
-                    <a href="AddHostSupervisor.php?" class="btn bg-orange float-right mx-1"><i class="fa fa-user-plus"></i> Add Supervisor</a>
+                    <a href="AddHost_Supervisor.php" class="btn bg-orange float-right mx-1"><i class="fa fa-user-plus"></i> Add Supervisor</a>
 
                   <?php
                   }
